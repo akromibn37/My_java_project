@@ -1,0 +1,89 @@
+
+public class sem {
+	static int val1 = 0;
+	static int val2 = 0;
+	static int count = 0;
+	static int i1 = 0;
+	static int i2 = 0;
+	static int k = 0;
+	static int r1 = 0;
+	static int r2 =0;
+
+	public static void p1() {		
+		while (i1 < 5) {
+			if(r1==0)
+			{
+				sync(x.k);
+			}
+			count++;
+			i1 = i1 + 1;
+		}
+		System.out.println("p1 terminate");
+	}
+
+	public static void p2() {		
+		while (i2 < 5) {
+			if(r2==0)
+			{
+				sync(k);
+			}
+			System.out.println(count);
+			i2 = i2 + 1;
+		}
+		System.out.println("p2 terminate");
+	}
+	public static void sync(int k)
+	{
+		if(k==1)
+		{
+			wait(val1,k);
+			sig(val2,k);
+		}
+		else
+		{
+			wait(val2,k);
+			sig(val1,k);
+		}
+	}
+
+	public static void wait(int val,int k) {
+		val--;
+		if (val < 0) {
+			System.out.println("switch");
+			if(k==1)
+			{
+				r2=0;
+				k=2;
+				p2();
+			}
+			else
+			{
+				r1=0;
+				k=1;
+				p1();
+			}
+		}
+	}
+
+	public static void sig(int val,int k) {
+		val++;
+		if(val<=0)
+		{
+			if(k==1)
+			{
+				r1=1;
+				p1();
+			}
+			else
+			{
+				r2=1;
+				p2();
+			}
+		}		
+	}
+
+	public static void main(String[] args) {	
+		variable x = new variable();
+		p1();
+	}
+}

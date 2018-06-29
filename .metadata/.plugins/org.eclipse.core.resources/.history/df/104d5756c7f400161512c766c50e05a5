@@ -1,0 +1,30 @@
+
+public class sem {
+
+	int val1;
+	int val2;
+	int count;
+	
+	public static void p1(int count)
+	{
+		int i =0;
+		while(i<5)
+		{
+			sync();
+			count++;
+			i = i+1;
+		}
+		System.out.println("p1 terminate");
+	}
+	public static void p2(int count)
+	{
+		int i = 0;
+		while(i<5)
+		{
+			sync()
+			System.out.println(count);
+			i = i+1;
+		}
+		System.out.println("p2 terminate");
+	}
+}

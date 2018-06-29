@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<addCategory
+		id="category_1466145123059"
+		name="Custom"
+		description="Container for custom components"
+		visible="true"
+		open="true"/>
+	<addComponent
+		id="custom_1466145123059"
+		name="ImagePanel"
+		description="Creates v.ImagePanel component."
+		visible="true"
+		class="v.ImagePanel"
+		category="category_1466145123059"/>
+</commands>

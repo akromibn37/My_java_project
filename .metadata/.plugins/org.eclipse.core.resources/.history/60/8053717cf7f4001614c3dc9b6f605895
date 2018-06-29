@@ -1,0 +1,99 @@
+
+public class sem {	
+	
+	public static void main(String[] args) {	
+		variable x = new variable();
+		x.k = 1;
+		p1(x);
+	}
+
+	public static void p1(variable x) {		
+		while (x.i1 < 5) {
+			if(x.r1==0)
+			{
+				sync(x);
+			}
+			x.count++;
+			x.i1 = x.i1 + 1;
+		}
+		System.out.println("p1 terminate");
+	}
+
+	public static void p2(variable x) {		
+		while (x.i2 < 5) {
+			if(x.r2==0)
+			{
+				sync(x);
+			}
+			System.out.println(x.count);
+			x.i2 = x.i2 + 1;
+		}
+		System.out.println("p2 terminate");
+	}
+	public static void sync(variable x)
+	{
+		if(x.k==1)
+		{
+			wait(x);
+			sig(x);
+		}
+		else
+		{
+			sig(x);
+			wait(x);			
+		}
+	}
+
+	public static void wait(variable x) {		
+		if(x.k==1)
+		{
+			x.val1--;
+			if (x.val1 < 0) {					
+				x.r2=0;
+				x.k=2;
+//				return;
+				System.out.println("switch to p2");
+				p2(x);					
+			}
+			return;
+		}
+		else
+		{			
+			x.val2--;
+			if (x.val2 < 0) {			
+				x.r1=0;
+				x.k=1;
+				System.out.println("switch to p1");
+				p1(x);					
+			}
+			return;
+		}		
+	}
+
+	public static void sig(variable x) {		
+		if(x.k==1)
+		{
+			x.val1++;
+			if(x.val1<=0)
+			{
+				x.r1=1;
+				System.out.println("p1 continue");
+				p1(x);
+			}
+		}
+		else
+		{
+			x.val2++;
+			if(x.val2<=0)
+			{
+				x.r2=1;
+				System.out.println("p2 continue");
+				p2(x);			
+			}	
+		}
+		
+			
+	}
+
+	
+}
